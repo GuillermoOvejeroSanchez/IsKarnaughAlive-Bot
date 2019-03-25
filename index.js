@@ -8,13 +8,8 @@ var request = require("request");
 var alreadyDead = false;
 var diedOn = "DD/MM/YYYY";
 
-//// Uncomment to start Tweeting ////
-
-//tweetKarnaughStatus();
-//setInterval(tweetKarnaughStatus, 1000 * 60 * 60 * 12); //tweets every 12 hours
-
-/////////////////////////////////////
-
+tweetKarnaughStatus();
+setInterval(tweetKarnaughStatus, 1000 * 60 * 60 * 12); //tweets every 12 hours
 
 function tweetKarnaughStatus() {
     var isAlive = getKarnaughStatus();

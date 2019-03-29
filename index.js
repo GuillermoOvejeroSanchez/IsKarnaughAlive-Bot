@@ -26,15 +26,15 @@ function tweetKarnaughStatus() {
         alreadyDead = true;
     }
     statusIndex++;
-    console.log(status);
+    //console.log(status);
     
-/*
+
     T.post('statuses/update', {
         status: status
     }, function (err, data, response) {
         if (err) console.log(err);
     })
-*/
+
 }
 
 

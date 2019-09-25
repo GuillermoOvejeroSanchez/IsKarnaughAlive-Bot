@@ -48,24 +48,25 @@ async function getKarnaughStatus() {
         json: false
     }, function (error, response, body) {
 
-        if (!error && response.statusCode === 200) {
+         if (!error && response.statusCode === 200) {
            // console.log(body) // Print the json response
             var parsed = JSON.parse(body);
-            var infobox = parsed.query.pages[12748221].revisions[0]["*"].split('|');
+            var infobox = parsed.query.pages[12748221].revisions[0]["*"].split($
+        console.log(`INFOBOX17:${infobox[17]}`);
+           // console.log(`${infobox[15]}${infobox[16]}${infobox[17]}${infobox[$
 
-            console.log(`${infobox[14]}${infobox[15]}${infobox[16]}${infobox[17]}${infobox[18]}${infobox[19]}${infobox[20]}`); //Print death_date
-
-            if (infobox[14] != ' death_date  =   <!--{{death date and age ') {
-                //console.log('rip');
-                return true;
-            } else if (infobox[14] === ' death_date         = {{dda') {
+            if (infobox[17] != ' death_date  = \n') {
+               // console.log('rip');
+               return true;
+            } else if (infobox[17] === ' death_date         = {{dda') {
                 //infoboxes 15 16 17 = deat_date (YYYY/MM/DD)
-                //console.log('rip');
+               // console.log('rip2');
                 return true;
-            } else {
-                //console.log('still alive');
+                } else {
+                console.log('Status: Alive');
                 return false;
             }
         }
+
     })
 }

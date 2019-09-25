@@ -5,14 +5,17 @@ var moment = require('moment');
 var T = new Twit(require('./config')); //Config file with tokens
 var request = require("request");
 
+var birthday = moment('1924-10-04', "YYYY-MM-DD");
 var alreadyDead = false;
 var diedOn = "DD/MM/YYYY";
+
 var status = '';
 var statusIndex = 0;
 tweetKarnaughStatus();
-//setInterval(tweetKarnaughStatus, 1000 * 60 * 60 * 12); //tweets every 12 hours
+setInterval(tweetKarnaughStatus, 1000 * 60 * 60 * 24); //tweets every 24 hours
 
 function tweetKarnaughStatus() {
+    getKarnaughBirthday();
     var isDead = false;
     isDead = getKarnaughStatus();
     if (isDead){
@@ -65,5 +68,20 @@ async function getKarnaughStatus() {
             }
         }
     })
+}
+
+function getKarnaughBirthday(){
+    var years = moment().diff(birthday, 'years');
+    var day = moment(birthday).add(years+1,'years');
+    var daysLeft = day.diff(moment(), 'days');
+    if(daysLeft >= 365){      
+        var status = `Happy Birthday Karnaugh! Turning ${years} years old today`
+        console.log(status);
+        T.post('statuses/update', {
+            status: status
+        }, function (err, data, response) {
+            if (err) console.log(err);
+        })
+    }
 }
 
